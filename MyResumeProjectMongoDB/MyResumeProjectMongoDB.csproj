@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DAL\Entities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\sidebar-05\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\css\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\css\bootstrap\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\css\bootstrap\mixins\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\fonts\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\images\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\js\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\scss\.DS_Store" />
+    <None Include="wwwroot\sidebar-05\scss\bootstrap\.DS_Store" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="MongoDB.Bson" Version="2.23.1" />
+  </ItemGroup>
+
+</Project>
