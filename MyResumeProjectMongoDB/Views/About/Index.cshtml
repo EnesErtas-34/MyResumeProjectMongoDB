@@ -1,0 +1,66 @@
+﻿@model List<About>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	int count = 0;
+}
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="container">
+
+	<h3>Hakkımızda İşlemleri</h3>
+	<br />
+
+	<table class="table table-bordered">
+		<tr>
+			<th>#</th>
+			<th>Başlık</th>
+			<th>Açıklama</th>
+			<th>Özellik 1</th>
+			<th>Özellik 2</th>
+			<th>Özellik 3</th>
+			<th>Sil</th>
+			<th>Güncelle</th>
+		</tr>
+		@foreach (var item in Model)
+		{
+			count++;
+			<tr>
+				<td>@count</td>
+				<td>@item.Title</td>
+				<td>@item.Description</td>
+				<td>@item.Feature1</td>
+				<td>@item.Feature2</td>
+				<td>@item.Feature3</td>
+				<td><a href="#" onclick="return deleteAbout('@item.AboutID')" class="btn btn-outline-danger"><i class="fas fa-trash"></i>Sil</a></td>
+				<td><a href="/About/UpdateAbout/@item.AboutID" class="btn btn-outline-success"><i class="fas fa-pen"></i> Güncelle</a></td>
+			</tr>
+		}
+	</table>
+
+	<a href="/About/CreateAbout/" class="btn btn-outline-primary"><i class="fas fa-plus-circle"></i> Yeni Özellik Girişi</a>
+</div>
+
+
+
+
+<script>
+	function deleteAbout(id) {
+		Swal.fire({
+			title: 'Silmek istediğinize emin misiniz?',
+			text: 'Bu öğeyi silerseniz geri alamazsınız!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Sil',
+			cancelButtonText: 'İptal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.href = "/About/DeleteAbout?id=" + id;
+			}
+		});
+	}
+</script>
+

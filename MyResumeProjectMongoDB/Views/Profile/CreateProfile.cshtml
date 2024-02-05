@@ -1,0 +1,27 @@
+﻿@model Profile
+@{
+    ViewData["Title"] = "CreateProfile";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="container">
+    <form method="post">
+        <label>Ad Soyad</label>
+        <input type="text" asp-for="NameSurname" class="form-control" />
+        <br />
+        <label>Başlık1</label>
+        <input type="text" asp-for="Title1" class="form-control" />
+        <br />
+        <label>Başlık2</label>
+        <input type="text" asp-for="Title2" class="form-control" />
+        <br />
+        <label>Başlık3</label>
+        <input type="text" asp-for="Title3" class="form-control" />
+        <br />
+        <label>Görsel</label>
+        <input type="text" asp-for="ImageURL" class="form-control" />
+        <br />
+        <button class="btn btn-success">Profil Ekle</button>
+    </form>
+</div>

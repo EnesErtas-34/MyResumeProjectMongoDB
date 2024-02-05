@@ -1,0 +1,63 @@
+﻿@model List<ProjectDetail>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+	int count=0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<div class="container">
+	<h3>Proje İşlemleri</h3>
+	<br />
+	
+		<table class="table table-bordered">
+			<tr>
+				<th>#</th>				
+				<th>Tamamlanan Proje</th>
+				<th>Proje Sayısı</th>
+				<th>Müşteri Memnuniyet</th>
+				<th>Müşteri Sayısı</th>
+				<th>Sil</th>
+				<th>Güncelle</th>
+			</tr>
+			@foreach (var item in Model)
+			{
+				count++;
+				<tr>
+					<td>@count</td>
+					<td>@item.Project1</td>
+					<td>@item.ProjectCount1</td>
+					<td>@item.Project2</td>					
+					<td>@item.ProjectCount2</td>
+					<td><a href="#" onclick="return deleteProject('@item.ProjectDetailID')" class="btn btn-outline-danger"><i class="fas fa-trash"></i>Sil</a></td>
+				<td><a href="/ProjectDetail/UpdateProjectDetail/@item.ProjectDetailID"  class="btn btn-outline-success"><i class="fas fa-pen"></i> Güncelle</a></td>
+				</tr>
+			}
+		</table>
+	
+	<a href="/ProjectDetail/CreateProjectDetail/" class="btn btn-outline-primary"><i class="fas fa-plus-circle"></i> Yeni Yetkinlik Girişi</a>
+</div>
+
+
+
+
+
+<script>
+	function deleteProject(id) {
+		Swal.fire({
+			title: 'Silmek istediğinize emin misiniz?',
+			text: 'Bu öğeyi silerseniz geri alamazsınız!',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Sil',
+			cancelButtonText: 'İptal'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.href = "/ProjectDetail/DeleteProjectDetail?id=" + id;
+			}
+		});
+	}
+</script>
+

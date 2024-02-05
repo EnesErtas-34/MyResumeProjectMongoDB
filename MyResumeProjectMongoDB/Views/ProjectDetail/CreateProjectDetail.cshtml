@@ -1,0 +1,25 @@
+﻿@model ProjectDetail
+@{
+    ViewData["Title"] = "CreateProjectDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="container">
+    <form method="post">        
+        <label>Tamamlanan Proje</label>
+        <input type="text" asp-for="Project1" class="form-control" />
+        <br />
+        <label>Proje Sayısı</label>
+        <input type="text" asp-for="ProjectCount1" class="form-control" />
+        <br />
+        <label>Devam Eden Proje</label>
+        <input type="text" asp-for="Project2" class="form-control" />
+        <br />
+        <label>Proje Sayısı</label>
+        <input type="text" asp-for="ProjectCount2" class="form-control" />
+        <br />
+        <button class="btn btn-success">Ekle</button>
+    </form>
+</div>
+

@@ -1,0 +1,218 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Yetenekler</h3>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container">
+    <br />
+    <button type="button" id="btnskilllist" class="btn btn-outline-primary">Yetenek Listesi</button>
+    <button type="button" id="btnskillcreate" class="btn btn-outline-info">Yetenek  Ekle</button>
+    <button type="button" id="btnskilldelete" class="btn btn-outline-danger">Yetenek  Sil</button>
+    <button type="button" id="btnskillget" class="btn btn-outline-dark">Yetenek  Getir</button>
+    <button type="button" id="btnskillupdate" class="btn btn-outline-success">Yetenek  Güncelle</button>
+</div>
+<br />
+
+
+
+<h4>Yetenek Listesi</h4>
+<div id="skilllist"></div>
+<hr />
+
+
+<h4>Yeni Yetenek Girişi</h4>
+<div>
+    <label>Başlık</label>
+    <input type="text" class="form-control" id="txtskillname" style="border:1px solid #00cc00 " />
+    <br />
+    <label>İlerleme</label>
+    <input type="text" class="form-control" id="txtprogress" style="border:1px solid #00cc00 " />
+    <br />
+</div>
+<hr />
+
+
+<h4>Yetenek Getirme Paneli</h4>
+<label>Yetenek ID</label>
+<input type="text" class="form-control" id="txtskillid" style="border:1px solid #00cc00 " />
+<div id="skilllistbyid"></div>
+<hr />
+
+
+<div>
+  
+    <h4>Yetenek Silme Alanı</h4>
+    <label>Yetenek ID</label>
+    <input type="text" class="form-control" id="txtdeletedskillid" style="border:1px solid #00cc00 " />
+</div>
+<hr />
+
+
+
+<div>
+    <h4>Yetenek Güncelleme Alanı</h4>
+    <label>Yetenek ID</label>
+    <input type="text" class="form-control" id="txtidedit" style="border:1px solid #00cc00 " />
+    <br />
+    <label>Başlık</label>
+    <input type="text" class="form-control" id="txtskillnameedit" style="border:1px solid #00cc00 " />
+    <br />
+    <label>İlerleme</label>
+    <input type="text" class="form-control" id="txtprogressedit" style="border:1px solid #00cc00 " />
+</div>
+<br />
+<br />
+
+
+
+<script>
+    $("#btnskilllist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Skill/SkillList/",
+            success: function (funk1) {
+                let values = jQuery.parseJSON(funk1);
+                console.log(values);
+                let tablehtml = `
+                            <table class=table table-bordered>
+                            <tr>
+                            <th>Yetenek ID</th>
+                            <th>Yetenek Başlık</th>
+                            <th>Yetenek İlerleme</th>
+                            </tr>`
+                $.each(values, (index, value) => {
+                    tablehtml += `
+                                <tr>
+                                <td>${value.SkillID}</td>
+                                    <td>${value.SkillName}</td>
+                                    <td>${value.Progress}</td>
+                                </tr>`
+                });
+
+                tablehtml += `
+                            </table>`;
+                $("#skilllist").html(tablehtml);
+            }
+        });
+    });
+
+
+    $("#btnskillcreate").click(function () {
+        let skillvalues = {
+            SkillName: $("#txtskillname").val(),
+            Progress: $("#txtprogress").val(),
+
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Skill/CreateSkill/",
+            data: skillvalues,
+            success: function (funk2) {
+                let result = jQuery.parseJSON(funk2);
+
+                Swal.fire({
+                    title: 'Tebrikler!',
+                    text: 'Yetenek başarıyla eklendi',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Tamam',
+                    cancelButtonText: 'İptal'
+                });
+
+            }
+        });
+    });
+
+
+    $("#btnskillget").click(function () {
+        let id = $("#txtskillid").val();
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            url: "/Skill/GetSkill/",
+            data: { SkillId: id },
+            success: function (funk3) {
+                let result = jQuery.parseJSON(funk3);
+                console.log(funk3);
+                let htmlstr = `<table class=table table-hover>
+                                                <tr>
+                                                <th>Yetenek ID</th>
+                                                <th>Yetenek Adı</th>
+                                                <th>Yetenek İlerleme</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>${result.SkillID}</td>
+                                                    <td>${result.SkillName}</td>
+                                                    <td>${result.Progress}</td>
+                                                </tr>
+                                                    </table>`;
+                $("#skilllistbyid").html(htmlstr);
+            }
+        });
+    });
+
+
+    $("#btnskilldelete").click(function () {
+        let id = $("#txtdeletedskillid").val();
+        $.ajax({
+            url: "/Skill/DeleteSkill/" + id,
+            type: "Get",
+            contentType: "application/json",
+            success: function (funk4) {
+                Swal.fire({
+                    title: 'Tebrikler!',
+                    text: 'Yetenek başarıyla silindi',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Tamam',
+                    cancelButtonText: 'İptal'
+                });
+            }
+        });
+
+    });
+
+
+    $("#btnskillupdate").click(function () {
+
+        let values = {
+            SkillID: $("#txtidedit").val(),
+            SkillName: $("#txtskillnameedit").val(),
+            Progress: $("#txtprogresssedit").val(),
+
+
+        };
+
+        $.ajax({
+            type: "Post",
+            url: "/Skill/UpdateSkill/",
+            data: values,
+            success: function (func5) {
+                Swal.fire({
+
+                    title: 'Tebrikler!',
+                    text: 'Yetenek başarıyla güncellendi',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Tamam',
+                    cancelButtonText: 'İptal'
+                });
+            }
+        });
+
+
+    });
+
+
+
+</script>
+

@@ -1,6 +1,6 @@
 ﻿namespace MyResumeProjectMongoDB.DAL.Settings
 {
-    public interface IDatabaseSettings
+    public class DatabaseSettings : IDatabaseSettings
     {
         public string ConnectionString { get; set; }
         public string Databasename { get; set; }
