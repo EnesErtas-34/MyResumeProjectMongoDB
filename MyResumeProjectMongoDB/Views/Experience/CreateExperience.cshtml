@@ -1,0 +1,22 @@
+﻿@model Experience
+@{
+    ViewData["Title"] = "CreateExperience";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="container">
+    <form method="post">
+        <label>Deneyim </label>
+        <input type="text" asp-for="Title" class="form-control" />
+        <br />
+        <label>Şirket</label>
+        <input type="text" asp-for="Company" class="form-control" />
+        <br />
+        <label>Tarih</label>
+        <input type="text" asp-for="Time" class="form-control" />
+        <br />
+        <button class="btn btn-outline-success">Ekle</button>
+    </form>
+</div>
+

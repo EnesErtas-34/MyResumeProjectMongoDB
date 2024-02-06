@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<div class="container text-center">
+    <br />
+    <button type="button" id="btnservicelist" class="btn btn-outline-primary">Hizmet Listesi</button>
+    <button type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal">Yeni Hizmet Ekle</button>
+    <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal2">Hizmet Sil</button>
+    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal1">Hizmet Güncelle</button>
+</div>
+<br />
+
+
+<div id="servicelist"></div>
+
+
+
+<div class="modal" id="myModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Hizmet Ekleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="dataTitle">ID:</label>
+                        <input type="text" class="form-control" id="txtdeletedserviceid" />
+                    </div>
+                    <button type="button" id="btnservicedelete" class="btn btn-outline-danger" onclick="addData()">Sil</button>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Hizmet Ekleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="dataTitle">Başlık:</label>
+                        <input type="text" class="form-control" id="dataTitle">
+                        <label for="dataDescription">Açıklama:</label>
+                        <input type="text" class="form-control" id="dataDescription">
+                    </div>
+                    <button type="button" id="btnservicecreate" class="btn btn-outline-success" onclick="addData()">Hizmet Kaydet</button>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Hizmet Güncelleme</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editdataID">ID:</label>
+                        <input type="text" class="form-control" id="txtidedit" />
+                        <label for="editdataTitle">Başlık:</label>
+                        <input type="text" class="form-control" id="editdataTitle">
+                        <label for="editdataDescription">Açıklama:</label>
+                        <input type="text" class="form-control" id="editdataDescription">
+                    </div>
+                    <button type="button" id="btnserviceupdate" class="btn btn-outline-success" onclick="addData()">Hizmet Güncelle</button>
+                </form>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $("#btnservicelist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Service/ServiceList/",
+            success: function (funk1) {
+                let values = jQuery.parseJSON(funk1);
+                console.log(values);
+                let tablehtml = `
+                                        <table class=table table-bordered>
+                                        <tr>
+                                        <th>Hizmet ID</th>
+                                        <th>Hizmet Başlık</th>
+                                        <th>Açıklama</th>
+                                        </tr>`
+                $.each(values, (index, value) => {
+                    tablehtml += `
+                                            <tr>
+                                            <td>${value.ServiceID}</td>
+                                                <td>${value.Title}</td>
+                                                <td>${value.Description}</td>
+                                            </tr>`
+                });
+
+                tablehtml += `
+                                        </table>`;
+                $("#servicelist").html(tablehtml);
+            }
+        });
+    });
+</script>
+
+<script>
+
+    $("#btnservicecreate").click(function () {
+        let skillvalues = {
+            Title: $("#dataTitle").val(),
+            Description: $("#dataDescription").val(),
+
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/Service/CreateService/",
+            data: skillvalues,
+            success: function (funk2) {
+                let result = jQuery.parseJSON(funk2);
+
+                Swal.fire({
+                    title: 'Tebrikler!',
+                    text: 'Hizmet başarıyla eklendi',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Tamam',
+                    cancelButtonText: 'İptal'
+                });
+
+            }
+        });
+    });
+</script>
+
+<script>
+
+    $("#btnserviceupdate").click(function () {
+
+        let values = {
+            ServiceID: $("#txtidedit").val(),
+            Title: $("#editdataTitle").val(),
+            Description: $("#editdataDescription").val(),
+
+
+        };
+
+        $.ajax({
+            type: "Post",
+            url: "/Service/UpdateService/",
+            data: values,
+            success: function (func5) {
+                Swal.fire({
+
+                    title: 'Tebrikler!',
+                    text: 'Hizmet başarıyla güncellendi',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Tamam',
+                    cancelButtonText: 'İptal'
+                });
+            }
+        });
+
+
+    });
+</script>
+
+<script>
+
+
+    $("#btnservicedelete").click(function () {
+        let id = $("#txtdeletedserviceid").val();
+        $.ajax({
+            url: "/Service/DeleteService/" + id,
+            type: "Get",
+            contentType: "application/json",
+            success: function (funk4) {
+                Swal.fire({
+                    title: 'Tebrikler!',
+                    text: 'Hizmet başarıyla silindi',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Tamam',
+                    cancelButtonText: 'İptal'
+                });
+            }
+        });
+
+    });
+
+
+</script>
+

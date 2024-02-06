@@ -8,5 +8,9 @@
         public string AboutCollectionName { get; set; }
         public string ProjectDetailCollectionName { get; set; }
         public string SkillCollectionName { get; set; }
+        public string ExperienceCollectionName { get; set; }
+        public string EducationCollectionName { get; set; }
+        public string ServiceCollectionName { get; set; }
+        
     }
 }

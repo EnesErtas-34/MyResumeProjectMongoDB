@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using MyResumeProjectMongoDB.DAL.Entities;
 using MyResumeProjectMongoDB.DAL.Settings;
+
 
 namespace MyResumeProjectMongoDB.Controllers
 {
@@ -10,7 +12,7 @@ namespace MyResumeProjectMongoDB.Controllers
         private readonly IMongoCollection<About> _aboutCollection;
         public AboutController(IDatabaseSettings _databaseSettings)
         {
-            var client=new MongoClient(_databaseSettings.ConnectionString);
+            var client = new MongoClient(_databaseSettings.ConnectionString);
             var database = client.GetDatabase(_databaseSettings.Databasename);
             _aboutCollection = database.GetCollection<About>(_databaseSettings.AboutCollectionName);
         }
@@ -32,13 +34,13 @@ namespace MyResumeProjectMongoDB.Controllers
         }
         public async Task<IActionResult> DeleteAbout(string id)
         {
-            await _aboutCollection.DeleteOneAsync(x=>x.AboutID == id);
+            await _aboutCollection.DeleteOneAsync(x => x.AboutID == id);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public async Task<IActionResult> UpdateAbout(string id)
         {
-            var values=await _aboutCollection.Find(x=>x.AboutID==id).FirstOrDefaultAsync();
+            var values = await _aboutCollection.Find(x => x.AboutID == id).FirstOrDefaultAsync();
             return View(values);
         }
         [HttpPost]
