@@ -1,0 +1,27 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "MessageDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Gelen Mesaj Detayı</h3>
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>Ad Soyad :</th>
+        <td>@Model.NameSurname</td>
+    </tr>
+    <tr>
+        <th>Email :</th>
+        <td>@Model.Mail</td>
+    </tr>
+    <tr>
+        <th>Konu :</th>
+        <td>@Model.Subject</td>
+    </tr>
+    <tr>
+        <th>Mesaj :</th>
+        <td>@Model.MessageDetail</td>
+    </tr>
+</table>
+

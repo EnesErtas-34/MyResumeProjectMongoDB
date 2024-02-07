@@ -1,0 +1,24 @@
+﻿@model List<Experience>
+<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+    <ul class="nav nav-pills rounded border border-2 border-primary mb-5">
+        <li class="nav-item w-50">
+            <button class="nav-link w-100 py-3 fs-5 active" data-bs-toggle="pill" href="#tab-1">Deneyim</button>
+        </li>
+        <li class="nav-item w-50">
+            <button class="nav-link w-100 py-3 fs-5" data-bs-toggle="pill" href="#tab-2">Eğitim</button>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane fade show p-0 active">
+            <div class="row gy-5 gx-4">
+                @foreach (var item in Model)
+                {
+                <div class="col-sm-6">
+                    <h5>@item.Title</h5>
+                    <hr class="text-primary my-2">
+                    <p class="text-primary mb-1">@item.Time</p>
+                    <h6 class="mb-0">@item.Company </h6>
+                </div>
+                }
+            </div>
+        </div>

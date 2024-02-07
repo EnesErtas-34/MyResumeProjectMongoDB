@@ -1,0 +1,51 @@
+﻿
+@model Message
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<form asp-controller="Default" asp-action="SendMessage" method="post">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="name" placeholder="Ad Soyad" asp-for="NameSurname">
+                <label for="name">Ad Soyad</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-floating">
+                <input type="email" class="form-control" id="email" placeholder="E-Mail adresiniz" asp-for="Mail">
+                <label for="email">E-Mail adresiniz</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="subject" placeholder="Konu" asp-for="Subject">
+                <label for="subject">Konu</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="mesaj" id="message" style="height: 100px" asp-for="MessageDetail"></textarea>
+                <label for="message">Mesaj</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary py-3 px-5" type="submit">Mesaj Gönder</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    function sendMessage() {
+        Swal.fire({
+            title: 'Mailiniz başarılı bir şekilde iletildi.',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Tamam'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Default/Index";
+            }
+        });
+    }
+</script>

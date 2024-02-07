@@ -1,0 +1,24 @@
+﻿@model List<ProjectDetail>
+<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6">
+            <img class="img-fluid rounded" src="~/proman-1.0.0/img/about-1.jpg" alt="">
+        </div>
+        <div class="col-sm-6">
+            <img class="img-fluid rounded" src="~/proman-1.0.0/img/about-2.jpg" alt="">
+        </div>
+    </div>
+       @foreach(var item in Model)
+    {
+    <div class="d-flex align-items-center mb-3">
+        <h5 class="border-end pe-3 me-3 mb-0">Tamamlanan Projeler</h5>
+        <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">@item.ProjectCount1</h2>
+    </div>
+    <p class="mb-4">@item.Project1.</p>
+    <div class="d-flex align-items-center mb-3">
+        <h5 class="border-end pe-3 me-3 mb-0">Mutlu Müşteriler</h5>
+        <h2 class="text-primary fw-bold mb-0" data-toggle="counter-up">@item.ProjectCount2</h2>
+    </div>
+    <p class="mb-0">@item.Project2.</p>
+    }
+</div>

@@ -1,0 +1,25 @@
+﻿@model Contact
+@{
+    ViewData["Title"] = "UpdateContact";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<div class="container">
+    <form method="post">
+
+        <input type="hidden" asp-for="ContactID" class="form-control" />
+        <br />
+        <label>Başlık</label>
+        <input type="text" asp-for="Address" class="form-control" />
+        <br />
+        <label>Telefon</label>
+        <input type="text" asp-for="Phone" class="form-control" />
+        <br />
+        <label>Mail</label>
+        <input type="text" asp-for="Mail" class="form-control" />
+        <br />
+        <button class="btn btn-outline-success">Güncelle</button>
+    </form>
+</div>
+

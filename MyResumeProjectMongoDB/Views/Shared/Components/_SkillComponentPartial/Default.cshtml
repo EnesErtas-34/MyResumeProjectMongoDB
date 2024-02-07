@@ -1,0 +1,29 @@
+﻿
+@model List<Skill>
+<div class="container-xxl py-6 pb-5" id="skill">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="display-5 mb-5">Beceriler & Deneyim</h1>
+                <p class="mb-4">Yazılımdaki ilgili yeteneklerim ve becerilerim.</p>
+                <h3 class="mb-4">Yeteneklerim</h3>
+                <div class="row align-items-center">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-6">
+                            <div class="skill mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="font-weight-bold">@item.SkillName</h6>
+                                    <h6 class="font-weight-bold">@item.Progress%</h6>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="@item.Progress" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    }
+                </div>
+            </div>

@@ -1,0 +1,17 @@
+﻿@model MyProject
+@{
+    ViewData["Title"] = "UpdateMyProject";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <form method="post">
+        <input type="hidden" asp-for="MyProjectID" />
+        <br />
+        <label>Görsel</label>
+        <input type="text" asp-for="ImageURL" class="form-control" />
+        <br />
+        <button class="btn btn-outline-success">Güncelle</button>
+    </form>
+</div>
+

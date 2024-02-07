@@ -11,6 +11,10 @@
         public string ExperienceCollectionName { get; set; }
         public string EducationCollectionName { get; set; }
         public string ServiceCollectionName { get; set; }
+        public string TestimonialCollectionName { get; set; }
+        public string ContactCollectionName { get; set; }
+        public string MyProjectCollectionName { get; set; }
+        public string MessageCollectionName { get; set; }
         
     }
 }

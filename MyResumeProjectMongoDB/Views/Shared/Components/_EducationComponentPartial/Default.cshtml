@@ -1,0 +1,15 @@
+﻿@model List<Education>
+<div id="tab-2" class="tab-pane fade show p-0">
+    <div class="row gy-5 gx-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6">
+                <h5>@item.Title</h5>
+                <hr class="text-primary my-2">
+                <p class="text-primary mb-1">@item.Time</p>
+                <h6 class="mb-0">@item.School</h6>
+            </div>
+
+        }
+    </div>
+</div>

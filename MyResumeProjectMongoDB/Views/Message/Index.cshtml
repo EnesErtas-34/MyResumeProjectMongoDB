@@ -1,0 +1,57 @@
+﻿@model List<Message>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<br />
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th>#</th>
+            <th>Ad Soyad</th>
+            <th>Mail</th>
+            <th>Konu</th>
+            <th>Mesaj</th>
+            <th>Sil</th>
+            <th>Detay</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.NameSurname</td>
+                <td>@item.Mail</td>
+                <td>@item.Subject</td>
+                <td>@item.MessageDetail</td>
+                <td><a href="/Message/DeleteMessage/@item.MessageID" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Message/MessageDetail/@item.MessageID" class="btn btn-success">Mesajı Aç</a></td>
+
+
+            </tr>
+        }
+
+    </table>
+    
+</div>
+<script>
+    function deleteMessage(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Message/DeleteMessage?id=" + id;
+            }
+        });
+    }
+</script>
+
