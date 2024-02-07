@@ -5,10 +5,10 @@
 
 **Kullanılan Teknolojiler**<hr> 
 **.** Asp.Net Core (MVC) 6.0 <br>
-**.** MongoDB <br>
+**.** MongoDB <hr>
 **.** Ajax <hr>
-**.** Viewcomponents <br>
-**.** Bootstrap <br>
-**.** Css <br>
+**.** Viewcomponents <hr>
+**.** Bootstrap <hr>
+**.** Css <hr>
 **.** HTML <br>
 **.** Sweet Alert <hr>
